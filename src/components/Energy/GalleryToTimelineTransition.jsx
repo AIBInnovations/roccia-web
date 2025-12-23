@@ -90,6 +90,7 @@ const GalleryToTimelineTransition = ({
         style={{ zIndex: 100 }}
       >
         {showTimeline && (
+          
           <TimelineHero
             autoPlay={true}
             autoPlayInterval={autoPlayInterval}

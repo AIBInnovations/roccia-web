@@ -114,7 +114,7 @@ const TimelineHero = ({
       className="relative h-screen w-screen overflow-hidden"
       aria-label={`${currentSectionData.label} section hero`}
     >
-      {/* Background Image - Instant change, no animation */}
+      {/* Background Color - Instant change, no animation */}
       <AnimatePresence initial={false} mode="wait">
         <motion.div
           key={activeSection}
@@ -126,17 +126,11 @@ const TimelineHero = ({
           transition={{
             duration: 0,
           }}
+          style={{
+            backgroundColor: currentSectionData.backgroundColor || '#1f2937'
+          }}
         >
-          <img
-            src={currentSectionData.backgroundImageUrl}
-            alt={`${currentSectionData.label} background`}
-            className="h-full w-full object-cover object-center"
-            loading="eager"
-            onError={(e) => {
-              e.target.style.backgroundColor = '#1f2937'
-            }}
-          />
-          <div className="background-overlay absolute inset-0 bg-black/20" />
+          <div className="background-overlay absolute inset-0 bg-black/10" />
         </motion.div>
       </AnimatePresence>
 
@@ -178,15 +172,24 @@ const TimelineHero = ({
               transition={{
                 duration: 0,
               }}
-              className="hidden bg-white flex-col w-[23.22916666] max-w-[23.2291666667vw] h-[calc(100vh-8rem)] rounded-2xl shadow-2xl lg:flex xl:max-w-[340px]"
+              className="hidden bg-white flex-col rounded-2xl shadow-2xl lg:flex"
               style={{
                 boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
                 padding:'20px',
                 marginRight:'20px',
                 marginBottom:'20px',
+                width: '340px',
+                minWidth: '340px',
+                maxWidth: '340px',
                 minHeight: 'calc(100vh - 8rem)',
                 maxHeight: 'calc(100vh - 8rem)',
-                overflow: 'hidden'
+                height: 'calc(100vh - 8rem)',
+                overflow: 'auto',
+                boxSizing: 'border-box',
+                flexShrink: 0,
+                flexGrow: 0,
+                display: 'flex',
+                flexDirection: 'column'
               }}
             >
               {/* Section Number - Very Large and Light */}
@@ -216,16 +219,18 @@ const TimelineHero = ({
 
               {/* Grid of 6 Mini Cards */}
               {currentSectionData.gridItems && currentSectionData.gridItems.length > 0 && (
-                <div className="grid-items-container mt-4 px-1 grid grid-cols-2 gap-2.5 sm:mt-5 sm:px-2 sm:grid-cols-3 sm:gap-3 lg:mt-6 lg:px-0 lg:gap-3" style={{ flexShrink: 0 }}>
+                <div className="grid-items-container mt-4 px-1 grid grid-cols-2 gap-2.5 sm:mt-5 sm:px-2 sm:grid-cols-3 sm:gap-3 lg:mt-6 lg:px-0 lg:gap-3" style={{ flexShrink: 0, width: '100%', minWidth: '100%', maxWidth: '100%' }}>
                   {currentSectionData.gridItems.map((item, index) => (
                     <div
                       key={index}
                       className="grid-item group relative overflow-hidden rounded-lg cursor-pointer transform transition-all duration-300 hover:scale-105 active:scale-95"
                       style={{
                         width: '100%',
-                        paddingBottom: '80%',
-                        height: 0,
-                        position: 'relative'
+                        height: '120px',
+                        minHeight: '120px',
+                        maxHeight: '120px',
+                        position: 'relative',
+                        overflow: 'hidden'
                       }}
                     >
                       <img
@@ -378,7 +383,7 @@ TimelineHero.propTypes = {
       sectionNumber: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
       titleText: PropTypes.string.isRequired,
-      backgroundImageUrl: PropTypes.string.isRequired,
+      backgroundColor: PropTypes.string,
       cardTitle: PropTypes.string.isRequired,
       cardSubtitle: PropTypes.string,
       cardDescription: PropTypes.string.isRequired,
