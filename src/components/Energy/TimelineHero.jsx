@@ -20,7 +20,13 @@ const TimelineHero = ({
   autoPlayInterval = 5000,
 }) => {
   const [backgroundZoomed, setBackgroundZoomed] = useState(false)
-  const [currentSectionData, setCurrentSectionData] = useState(sections[activeSection])
+  const [currentSectionData, setCurrentSectionData] = useState(sections?.[activeSection] || sections?.[0])
+
+  // Safety check for sections
+  if (!sections || sections.length === 0) {
+    console.error('TimelineHero: No sections provided')
+    return null
+  }
 
   // Trigger UI elements after background zoom completes
   useEffect(() => {
@@ -125,6 +131,10 @@ const TimelineHero = ({
             src={currentSectionData.backgroundImageUrl}
             alt={`${currentSectionData.label} background`}
             className="h-full w-full object-cover object-center"
+            loading="eager"
+            onError={(e) => {
+              e.target.style.backgroundColor = '#1f2937'
+            }}
           />
           <div className="background-overlay absolute inset-0 bg-black/20" />
         </motion.div>
@@ -173,7 +183,10 @@ const TimelineHero = ({
                 boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
                 padding:'20px',
                 marginRight:'20px',
-                marginBottom:'20px'
+                marginBottom:'20px',
+                minHeight: 'calc(100vh - 8rem)',
+                maxHeight: 'calc(100vh - 8rem)',
+                overflow: 'hidden'
               }}
             >
               {/* Section Number - Very Large and Light */}
@@ -202,17 +215,28 @@ const TimelineHero = ({
               </p>
 
               {/* Grid of 6 Mini Cards */}
-              {currentSectionData.gridItems && (
-                <div className="grid-items-container mt-4 px-1 grid grid-cols-2 gap-2.5 sm:mt-5 sm:px-2 sm:grid-cols-3 sm:gap-3 lg:mt-6 lg:px-0 lg:gap-3">
+              {currentSectionData.gridItems && currentSectionData.gridItems.length > 0 && (
+                <div className="grid-items-container mt-4 px-1 grid grid-cols-2 gap-2.5 sm:mt-5 sm:px-2 sm:grid-cols-3 sm:gap-3 lg:mt-6 lg:px-0 lg:gap-3" style={{ flexShrink: 0 }}>
                   {currentSectionData.gridItems.map((item, index) => (
                     <div
                       key={index}
-                      className="grid-item group relative overflow-hidden rounded-lg aspect-5/4 h-auto min-h-[60px] sm:min-h-[70px] lg:min-h-[80px] cursor-pointer transform transition-all duration-300 hover:scale-105 active:scale-95"
+                      className="grid-item group relative overflow-hidden rounded-lg cursor-pointer transform transition-all duration-300 hover:scale-105 active:scale-95"
+                      style={{
+                        width: '100%',
+                        paddingBottom: '80%',
+                        height: 0,
+                        position: 'relative'
+                      }}
                     >
                       <img
                         src={item.imageUrl}
                         alt={item.label}
-                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        className="object-cover transition-transform duration-300 group-hover:scale-110"
+                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+                        loading="eager"
+                        onError={(e) => {
+                          e.target.style.backgroundColor = '#e5e7eb'
+                        }}
                       />
                       <div className="image-overlay absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent transition-opacity group-hover:from-black/50" />
                       <div className="image-label-container absolute inset-0 flex items-end p-1.5 sm:p-2">
@@ -308,17 +332,28 @@ const TimelineHero = ({
             </p>
 
             {/* Grid Items */}
-            {currentSectionData.gridItems && (
+            {currentSectionData.gridItems && currentSectionData.gridItems.length > 0 && (
               <div className="mobile-grid-items-container mt-3 grid grid-cols-2 gap-2.5 sm:mt-4 sm:grid-cols-3 sm:gap-3 md:mt-5 md:gap-4">
                 {currentSectionData.gridItems.slice(0, 4).map((item, index) => (
                   <div
                     key={index}
-                    className="mobile-grid-item group relative overflow-hidden rounded-lg aspect-4/3 shadow-md transition-transform duration-300 active:scale-95 sm:rounded-xl"
+                    className="mobile-grid-item group relative overflow-hidden rounded-lg shadow-md transition-transform duration-300 active:scale-95 sm:rounded-xl"
+                    style={{
+                      width: '100%',
+                      paddingBottom: '75%',
+                      height: 0,
+                      position: 'relative'
+                    }}
                   >
                     <img
                       src={item.imageUrl}
                       alt={item.label}
-                      className="h-full w-full object-cover"
+                      className="object-cover"
+                      style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+                      loading="eager"
+                      onError={(e) => {
+                        e.target.style.backgroundColor = '#e5e7eb'
+                      }}
                     />
                     <div className="mobile-image-overlay absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                     <div className="mobile-image-label-container absolute inset-0 flex items-end p-2 sm:p-2.5">
