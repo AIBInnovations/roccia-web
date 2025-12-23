@@ -1,0 +1,286 @@
+/* =============================================
+   CONTENT HERO - LAYERED COMPOSITION
+============================================= */
+
+.content-hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 750px;
+  background-color: var(--color-background); /* Light beige */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 18vh; /* Responsive space for fixed navigation */
+}
+
+/* =============================================
+   LAYER 1: BACKGROUND ARCHITECTURAL ILLUSTRATION
+============================================= */
+
+.content-hero__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.content-hero__background-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0.85;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+/* =============================================
+   LAYER 2: HEADING TEXT (BEHIND STATUE)
+============================================= */
+
+.content-hero__text-layer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.content-hero__heading {
+  font-family: var(--font-Soligant);
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: var(--color-card-red); /* Deep maroon #710303 */
+  margin: 0;
+  text-transform: uppercase;
+  line-height: 1;
+  user-select: none;
+}
+
+/* =============================================
+   LAYER 3: STATUE IMAGE (MAIN FOCAL POINT)
+============================================= */
+
+/* Keyframe animation for floating effect */
+@keyframes statueFloat {
+  0%, 100% {
+    transform: translate(-50%, calc(-50% + var(--scroll-offset, 0px))) translateY(0px);
+  }
+  50% {
+    transform: translate(-50%, calc(-50% + var(--scroll-offset, 0px))) translateY(-20px);
+  }
+}
+
+.content-hero__statue-layer {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  --scroll-offset: 0px;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: auto;
+  height: 80vh;
+  max-height: 850px;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+  animation: statueFloat 4s ease-in-out infinite;
+}
+
+.content-hero__statue-image {
+  width: auto;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15))
+          drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+  user-select: none;
+  pointer-events: none;
+}
+
+/* =============================================
+   RESPONSIVE ADJUSTMENTS
+============================================= */
+
+/* Large screens (4K, Ultra-wide) */
+@media (min-width: 1920px) {
+  .content-hero {
+    padding-top: 18vh; /* Consistent with desktop */
+  }
+
+  .content-hero__statue-layer {
+    height: 80vh;
+    max-height: 900px;
+    min-height: 700px;
+  }
+}
+
+/* Standard laptops and desktops */
+@media (min-width: 1025px) and (max-width: 1919px) {
+  .content-hero {
+    padding-top: 18vh; /* Consistent percentage across all laptops */
+  }
+
+  .content-hero__statue-layer {
+    height: 80vh;
+    max-height: 850px;
+    min-height: 700px;
+  }
+}
+
+/* Small laptops and large tablets */
+@media (max-width: 1024px) {
+  .content-hero {
+    padding-top: 16vh; /* Slightly reduced for smaller screens */
+    min-height: 700px;
+  }
+
+  .content-hero__heading {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    letter-spacing: 0.12em;
+  }
+
+  .content-hero__statue-layer {
+    height: 75vh;
+    max-height: 750px;
+    min-height: 550px;
+  }
+}
+
+/* Tablets (iPad, etc) */
+@media (max-width: 768px) {
+  .content-hero {
+    height: 100vh;
+    min-height: 650px;
+    padding-top: 14vh; /* Proportional spacing for tablets */
+  }
+
+  .content-hero__heading {
+    font-size: clamp(2rem, 7vw, 5rem);
+    letter-spacing: 0.1em;
+  }
+
+  .content-hero__statue-layer {
+    height: 70vh;
+    max-height: 650px;
+    min-height: 500px;
+  }
+
+  .content-hero__text-layer {
+    transform: translate(-50%, -55%);
+  }
+
+  .content-hero__background-image {
+    opacity: 0.7;
+  }
+}
+
+/* Mobile landscape */
+@media (max-width: 640px) {
+  .content-hero {
+    min-height: 620px;
+    padding-top: 13vh;
+  }
+
+  .content-hero__statue-layer {
+    height: 67vh;
+    max-height: 600px;
+    min-height: 470px;
+  }
+}
+
+/* Mobile portrait */
+@media (max-width: 480px) {
+  .content-hero {
+    height: 100vh;
+    min-height: 600px;
+    padding-top: 12vh; /* Proportional spacing for mobile */
+  }
+
+  .content-hero__heading {
+    font-size: clamp(1.5rem, 6vw, 3.5rem);
+    letter-spacing: 0.08em;
+  }
+
+  .content-hero__statue-layer {
+    height: 65vh;
+    max-height: 550px;
+    min-height: 450px;
+  }
+
+  .content-hero__text-layer {
+    padding: 0 1rem;
+  }
+
+  .content-hero__background-image {
+    opacity: 0.6;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 375px) {
+  .content-hero {
+    min-height: 580px;
+    padding-top: 11vh;
+  }
+
+  .content-hero__heading {
+    font-size: clamp(1.3rem, 5.5vw, 3rem);
+  }
+
+  .content-hero__statue-layer {
+    height: 62vh;
+    max-height: 500px;
+    min-height: 420px;
+  }
+}
+
+/* =============================================
+   ACCESSIBILITY & PERFORMANCE
+============================================= */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .content-hero__statue-layer {
+    animation: none;
+    transition: none;
+    will-change: auto;
+  }
+
+  .content-hero__statue-image,
+  .content-hero__background-image {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .content-hero {
+    height: auto;
+    min-height: auto;
+    page-break-inside: avoid;
+  }
+
+  .content-hero__statue-layer {
+    position: relative;
+    transform: none;
+    height: auto;
+    max-height: none;
+  }
+
+  .content-hero__text-layer {
+    position: relative;
+    transform: none;
+  }
+}

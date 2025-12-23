@@ -1,0 +1,424 @@
+/* =============================================
+   CustomerReviewSection Component Styles
+
+   Premium editorial design featuring:
+   - Large watermark background typography
+   - Three-card deck layout (left, center, right)
+   - Rotated side cards with overlap effect
+============================================= */
+
+/* CSS Custom Properties */
+.customer-review {
+  --cr-bg-cream: #F5F1E8;
+  --cr-card-beige: #C9B89A;
+  --cr-card-beige-alt: #D4C4A8;
+  --cr-card-white: #FFFFFF;
+  --cr-text-gold: #C9A962;
+  --cr-text-body: #2D2D2D;
+  --cr-text-label: #666666;
+  --cr-icon-dark: #3D3D3D;
+
+  position: relative;
+  width: 100%;
+  background-color: var(--cr-bg-cream);
+}
+
+.customer-review__inner {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 5vw;
+}
+
+/* =============================================
+   Background Watermark Typography
+============================================= */
+.customer-review__background-text {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+}
+
+.customer-review__bg-word {
+  font-family: 'Playfair Display', 'Cormorant Garamond', 'Libre Baskerville', Georgia, serif;
+  font-size: clamp(120px, 16vw, 280px);
+  font-weight: 400;
+  color: var(--cr-text-gold);
+  opacity: 0.2;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.customer-review__bg-word--left {
+  transform: translateX(-25%);
+}
+
+.customer-review__bg-word--right {
+  transform: translateX(25%);
+}
+
+/* =============================================
+   Cards Wrapper Container
+============================================= */
+.customer-review__cards-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  height: 70vh;
+  min-height: 500px;
+  max-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* =============================================
+   Review Card - Base Styles
+============================================= */
+.customer-review__card {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 45px;
+  transform: rotate(var(--rotation, 0deg));
+  transition: transform 0.4s ease-out, box-shadow 0.3s ease;
+}
+
+/* =============================================
+   Card Variants - Positioning & Styling
+============================================= */
+
+/* Left Card */
+.customer-review__card--left {
+  width: clamp(320px, 32vw, 450px);
+  height: clamp(480px, 48vh, 550px);
+  background-color: var(--cr-card-beige);
+  left: 50%;
+  top: 50%;
+  transform-origin: center center;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 40;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+  will-change: transform, opacity, left, right;
+}
+
+.customer-review__card--left:hover {
+  box-shadow: 0 12px 50px rgba(0, 0, 0, 0.1);
+}
+
+/* Center Card */
+.customer-review__card--center {
+  width: clamp(340px, 32vw, 480px);
+  height: clamp(480px, 48vh, 550px);
+  background-color: var(--cr-card-white);
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 30;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
+}
+
+.customer-review__card--center:hover {
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Right Card */
+.customer-review__card--right {
+  width: clamp(320px, 32vw, 450px);
+  height: clamp(480px, 48vh, 550px);
+  background-color: var(--cr-card-beige-alt);
+  left: 50%;
+  top: 50%;
+  transform-origin: center center;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 40;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+  will-change: transform, opacity, left, right;
+}
+
+.customer-review__card--right:hover {
+  box-shadow: 0 12px 50px rgba(0, 0, 0, 0.1);
+}
+
+/* =============================================
+   Card Inner Structure
+============================================= */
+
+/* Top & Bottom Rows */
+.customer-review__card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.customer-review__card-row--top {
+  margin-bottom: auto;
+}
+
+.customer-review__card-row--bottom {
+  margin-top: auto;
+}
+
+/* Labels */
+.customer-review__label {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--cr-text-label);
+}
+
+/* Star Icons */
+.customer-review__star-icon {
+  width: 12px;
+  height: 12px;
+  fill: var(--cr-icon-dark);
+  flex-shrink: 0;
+}
+
+/* Main Review Text */
+.customer-review__text {
+  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(16px, 1.3vw, 20px);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--cr-text-body);
+  margin: 0;
+  padding: 30px 0;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* Customer Info */
+.customer-review__customer-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.customer-review__customer-name {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cr-text-body);
+}
+
+/* =============================================
+   RESPONSIVE BREAKPOINTS
+============================================= */
+
+/* Large Desktop (>= 1600px) */
+@media (min-width: 1600px) {
+  /* GSAP handles transforms */
+}
+
+/* Desktop (1200px - 1599px) */
+@media (max-width: 1599px) and (min-width: 1200px) {
+  /* GSAP handles transforms */
+}
+
+/* Tablet Landscape (1024px - 1199px) */
+@media (max-width: 1199px) {
+  .customer-review {
+    padding: 60px 4vw;
+  }
+
+  .customer-review__bg-word {
+    font-size: clamp(100px, 14vw, 200px);
+  }
+
+  .customer-review__cards-wrapper {
+    height: 70vh;
+    min-height: 450px;
+  }
+
+  .customer-review__card {
+    padding: 32px 36px;
+  }
+
+  .customer-review__card--left,
+  .customer-review__card--right {
+    width: clamp(280px, 35vw, 400px);
+    height: clamp(350px, 55vh, 500px);
+  }
+
+  .customer-review__card--center {
+    width: clamp(280px, 32vw, 380px);
+    height: clamp(320px, 42vh, 450px);
+  }
+}
+
+/* Tablet Portrait (768px - 1023px) */
+@media (max-width: 1023px) {
+  .customer-review {
+    min-height: auto;
+    padding: 60px 5vw 50px;
+  }
+
+  .customer-review__background-text {
+    opacity: 0.5;
+  }
+
+  .customer-review__bg-word {
+    font-size: clamp(80px, 18vw, 160px);
+  }
+
+  .customer-review__cards-wrapper {
+    height: auto;
+    min-height: auto;
+    max-height: none;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px 0;
+  }
+
+  .customer-review__card {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: rotate(var(--rotation)) !important;
+    width: min(90vw, 450px) !important;
+    height: auto !important;
+    min-height: 350px;
+  }
+
+  .customer-review__card--left {
+    transform: rotate(-6deg) !important;
+    z-index: 10;
+  }
+
+  .customer-review__card--center {
+    transform: rotate(0deg) !important;
+    z-index: 20;
+    margin: -30px 0;
+  }
+
+  .customer-review__card--right {
+    transform: rotate(6deg) !important;
+    z-index: 10;
+  }
+
+  .customer-review__text {
+    font-size: 17px;
+    padding: 24px 0;
+  }
+}
+
+/* Mobile (< 768px) */
+@media (max-width: 767px) {
+  .customer-review {
+    padding: 40px 20px 35px;
+    min-height: auto;
+  }
+
+  .customer-review__bg-word {
+    font-size: clamp(60px, 22vw, 120px);
+    opacity: 0.15;
+  }
+
+  .customer-review__bg-word--left {
+    transform: translateX(-35%);
+  }
+
+  .customer-review__bg-word--right {
+    transform: translateX(35%);
+  }
+
+  .customer-review__cards-wrapper {
+    gap: 16px;
+    padding: 10px 0;
+  }
+
+  .customer-review__card {
+    padding: 28px 24px;
+    width: min(92vw, 380px) !important;
+    min-height: 300px;
+  }
+
+  .customer-review__card--left {
+    transform: rotate(-4deg) !important;
+  }
+
+  .customer-review__card--center {
+    margin: -16px 0;
+  }
+
+  .customer-review__card--right {
+    transform: rotate(4deg) !important;
+  }
+
+  .customer-review__label {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+  }
+
+  .customer-review__text {
+    font-size: 15px;
+    line-height: 1.6;
+    padding: 20px 0;
+  }
+
+  .customer-review__star-icon {
+    width: 10px;
+    height: 10px;
+  }
+
+  .customer-review__customer-name {
+    font-size: 10px;
+  }
+}
+
+/* Small Mobile (< 480px) */
+@media (max-width: 479px) {
+  .customer-review {
+    padding: 35px 16px 30px;
+  }
+
+  .customer-review__bg-word {
+    font-size: 18vw;
+  }
+
+  .customer-review__cards-wrapper {
+    gap: 14px;
+    padding: 5px 0;
+  }
+
+  .customer-review__card {
+    padding: 24px 20px;
+    width: 100% !important;
+    min-height: 280px;
+  }
+
+  .customer-review__card--left,
+  .customer-review__card--right {
+    transform: rotate(0deg) !important;
+  }
+
+  .customer-review__card--center {
+    margin: -12px 0;
+  }
+
+  .customer-review__text {
+    font-size: 14px;
+    padding: 18px 0;
+  }
+}
