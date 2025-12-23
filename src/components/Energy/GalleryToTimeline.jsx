@@ -178,17 +178,18 @@ const GalleryToTimeline = ({
   return (
     <section
       ref={sectionRef}
-      className="customer-gallery"
+      className="customer-gallery bg-red-500"
       aria-label="Gallery to Timeline Transition"
       style={{
         position: 'relative',
-        backgroundColor: 'transparent',
+        gap:'0px',
         backgroundImage: 'none',
         background: 'none',
         height: '500vh',
         overflow: 'visible',
         padding: 0,
-        display: 'block'
+        display: 'block',
+
       }}
     >
       {/* Gallery Content - This gets pinned */}
@@ -203,7 +204,7 @@ const GalleryToTimeline = ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        gap: 'clamp(60px, 10vh, 120px)'
+        gap: 'clamp(40px, 1vh, 100px)'
       }}>
         {/* Top Row */}
         <div className="customer-gallery__top-row">
@@ -211,12 +212,9 @@ const GalleryToTimeline = ({
             <h2>Our Customers</h2>
           </header>
 
-          <div className="customer-gallery__top-text">
+          <div className="customer-gallery__top-text  ">
             <p>{topRightText}</p>
-            <div className="customer-gallery__bullet">
-              <span className="customer-gallery__bullet-dot" aria-hidden="true" />
-              <span className="customer-gallery__bullet-label">{bulletLabel}</span>
-            </div>
+           
           </div>
         </div>
 

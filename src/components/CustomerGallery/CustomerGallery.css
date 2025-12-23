@@ -26,12 +26,13 @@
 
   width: 100%;
   max-width: 100%;
-  min-height: 100vh;
+  height: 200px;
   background-color: var(--gallery-bg);
-  padding: var(--gallery-padding-y) var(--gallery-padding-x);
+  /* padding: var(--gallery-padding-y) var(--gallery-padding-x); */
   display: flex;
   flex-direction: column;
-  gap: var(--section-gap);
+background-color: red;
+
   overflow: hidden;
   overflow-x: hidden;
   transition: background-color 0.6s ease;
@@ -46,9 +47,9 @@
    Top Row - Label & Text Side by Side
 ============================================= */
 .customer-gallery__top-row {
-  padding-top: 100px;
+  /* padding-top: 100px; */
   display: flex;
-  gap: 43%;
+  gap: 60%;
   align-items: flex-start;
   width: 100%;
 }
@@ -73,9 +74,9 @@
    Top Right Text Block
 ============================================= */
 .customer-gallery__top-text {
-  width: clamp(320px, 38%, 520px);
+  width: 40%;
   text-align: right;
-  width: 100%;
+
   /* background-color: red; */
 }
 
@@ -90,6 +91,7 @@
 
 /* Bullet Label */
 .customer-gallery__bullet {
+  background-color: red;
   display: flex;
   align-items: center;
   gap: 10px;
