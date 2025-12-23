@@ -167,7 +167,7 @@ const TimelineHero = ({
         className="relative h-screen w-screen overflow-hidden"
         aria-label={`${currentSectionData.label} section hero`}
       >
-      {/* Background Color - Instant change, no animation */}
+      {/* Background Image - Instant change, no animation */}
       <AnimatePresence initial={false} mode="wait">
         <motion.div
           key={activeSection}
@@ -179,11 +179,17 @@ const TimelineHero = ({
           transition={{
             duration: 0,
           }}
-          style={{
-            backgroundColor: currentSectionData.backgroundColor || '#1f2937'
-          }}
         >
-          <div className="background-overlay absolute inset-0 bg-black/10" />
+          <img
+            src={currentSectionData.backgroundImageUrl}
+            alt={`${currentSectionData.label} background`}
+            className="h-full w-full object-cover object-center"
+            loading="eager"
+            onError={(e) => {
+              e.target.style.backgroundColor = '#1f2937'
+            }}
+          />
+          <div className="background-overlay absolute inset-0 bg-black/20" />
         </motion.div>
       </AnimatePresence>
 
@@ -359,7 +365,7 @@ TimelineHero.propTypes = {
       sectionNumber: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
       titleText: PropTypes.string.isRequired,
-      backgroundColor: PropTypes.string,
+      backgroundImageUrl: PropTypes.string.isRequired,
       cardTitle: PropTypes.string.isRequired,
       cardSubtitle: PropTypes.string,
       cardDescription: PropTypes.string.isRequired,
