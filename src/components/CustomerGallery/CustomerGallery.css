@@ -22,7 +22,7 @@
   --width-hero: 36%;
 
   /* Section gap - controls spacing between top, gallery, bottom */
-  --section-gap: clamp(60px, 10vh, 120px);
+  --section-gap: clamp(10px, 5vh, 80px);
 
   width: 100%;
   max-width: 100%;
@@ -46,8 +46,8 @@
    Top Row - Label & Text Side by Side
 ============================================= */
 .customer-gallery__top-row {
+  padding-top: 100px;
   display: flex;
-  /* justify-content: space-between; */
   gap: 43%;
   align-items: flex-start;
   width: 100%;
@@ -74,7 +74,9 @@
 ============================================= */
 .customer-gallery__top-text {
   width: clamp(320px, 38%, 520px);
-  text-align: left;
+  text-align: right;
+  width: 100%;
+  /* background-color: red; */
 }
 
 .customer-gallery__top-text p {
@@ -172,7 +174,10 @@
    Bottom Left Paragraph
 ============================================= */
 .customer-gallery__bottom-text {
+  padding-bottom: 20px;
   width: clamp(280px, 32%, 460px);
+  align-self: flex-start;
+  text-align: left;
 }
 
 .customer-gallery__bottom-text p {
