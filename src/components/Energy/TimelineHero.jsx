@@ -110,10 +110,18 @@ const TimelineHero = ({
   }
 
   return (
-    <section
-      className="relative h-screen w-screen overflow-hidden"
-      aria-label={`${currentSectionData.label} section hero`}
-    >
+    <>
+      <style>{`
+        @media (min-width: 1280px) {
+          .desktop-card {
+            display: flex !important;
+          }
+        }
+      `}</style>
+      <section
+        className="relative h-screen w-screen overflow-hidden"
+        aria-label={`${currentSectionData.label} section hero`}
+      >
       {/* Background Color - Instant change, no animation */}
       <AnimatePresence initial={false} mode="wait">
         <motion.div
@@ -160,7 +168,7 @@ const TimelineHero = ({
           </AnimatePresence>
         </div>
 
-        {/* RIGHT SECTION - White Floating Card */}
+        {/* RIGHT SECTION - White Floating Card - Desktop Only (1280px+) */}
         <AnimatePresence initial={false} mode="wait">
           {backgroundZoomed && (
             <motion.div
@@ -172,7 +180,7 @@ const TimelineHero = ({
               transition={{
                 duration: 0,
               }}
-              className="hidden bg-white flex-col rounded-2xl shadow-2xl lg:flex"
+              className="desktop-card bg-white flex-col rounded-2xl shadow-2xl"
               style={{
                 boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
                 padding:'20px',
@@ -188,7 +196,7 @@ const TimelineHero = ({
                 boxSizing: 'border-box',
                 flexShrink: 0,
                 flexGrow: 0,
-                display: 'flex',
+                display: 'none',
                 flexDirection: 'column'
               }}
             >
@@ -219,7 +227,7 @@ const TimelineHero = ({
 
               {/* Grid of 6 Mini Cards */}
               {currentSectionData.gridItems && currentSectionData.gridItems.length > 0 && (
-                <div className="grid-items-container mt-4 px-1 grid grid-cols-2 gap-2.5 sm:mt-5 sm:px-2 sm:grid-cols-3 sm:gap-3 lg:mt-6 lg:px-0 lg:gap-3" style={{ flexShrink: 0, width: '100%', minWidth: '100%', maxWidth: '100%' }}>
+                <div className="grid-items-container hidden lg:grid mt-4 px-1 grid-cols-2 gap-2.5 sm:mt-5 sm:px-2 sm:grid-cols-3 sm:gap-3 lg:mt-6 lg:px-0 lg:gap-3" style={{ flexShrink: 0, width: '100%', minWidth: '100%', maxWidth: '100%' }}>
                   {currentSectionData.gridItems.map((item, index) => (
                     <div
                       key={index}
@@ -314,7 +322,7 @@ const TimelineHero = ({
             transition={{
               duration: 0,
             }}
-            className="mobile-card absolute bottom-[68px] left-4 right-4 rounded-2xl bg-white/98 backdrop-blur-md p-4 shadow-2xl sm:bottom-20 sm:left-6 sm:right-6 sm:p-6 md:bottom-24 md:p-7 lg:hidden max-h-[calc(100vh-180px)] overflow-y-auto scrollbar-hide"
+            className="mobile-card absolute bottom-[68px] left-4 right-4 rounded-2xl bg-white/98 backdrop-blur-md p-4 shadow-2xl sm:bottom-20 sm:left-6 sm:right-6 sm:p-6 md:bottom-24 md:p-7 xl:hidden max-h-[calc(100vh-180px)] overflow-y-auto scrollbar-hide"
             style={{
               boxShadow: '0 20px 40px rgba(0, 0, 0, 0.25), 0 10px 20px rgba(0, 0, 0, 0.15)',
               scrollbarWidth: 'none',
@@ -374,6 +382,7 @@ const TimelineHero = ({
         )}
       </AnimatePresence>
     </section>
+    </>
   )
 }
 
