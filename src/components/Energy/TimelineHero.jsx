@@ -112,9 +112,54 @@ const TimelineHero = ({
   return (
     <>
       <style>{`
+        .responsive-card {
+          display: flex !important;
+        }
+
+        /* Mobile/Tablet: Bottom positioned, fixed size */
+        @media (max-width: 1279px) {
+          .responsive-card {
+            position: absolute !important;
+            bottom: 68px !important;
+            left: 1rem !important;
+            right: 1rem !important;
+            width: auto !important;
+            min-width: auto !important;
+            max-width: none !important;
+            height: auto !important;
+            min-height: auto !important;
+            max-height: calc(100vh - 180px) !important;
+            padding: 1rem !important;
+            margin: 0 !important;
+          }
+        }
+
+        /* Tablet */
+        @media (min-width: 640px) and (max-width: 1279px) {
+          .responsive-card {
+            bottom: 5rem !important;
+            left: 1.5rem !important;
+            right: 1.5rem !important;
+            padding: 1.5rem !important;
+          }
+        }
+
+        /* Desktop: Right positioned, fixed 340px */
         @media (min-width: 1280px) {
-          .desktop-card {
-            display: flex !important;
+          .responsive-card {
+            position: relative !important;
+            width: 340px !important;
+            min-width: 340px !important;
+            max-width: 340px !important;
+            height: calc(100vh - 8rem) !important;
+            min-height: calc(100vh - 8rem) !important;
+            max-height: calc(100vh - 8rem) !important;
+            padding: 20px !important;
+            margin-right: 20px !important;
+            margin-bottom: 20px !important;
+            bottom: auto !important;
+            left: auto !important;
+            right: auto !important;
           }
         }
       `}</style>
@@ -168,7 +213,7 @@ const TimelineHero = ({
           </AnimatePresence>
         </div>
 
-        {/* RIGHT SECTION - White Floating Card - Desktop Only (1280px+) */}
+        {/* RIGHT SECTION - Responsive Card (All Screens) */}
         <AnimatePresence initial={false} mode="wait">
           {backgroundZoomed && (
             <motion.div
@@ -180,24 +225,17 @@ const TimelineHero = ({
               transition={{
                 duration: 0,
               }}
-              className="desktop-card bg-white flex-col rounded-2xl shadow-2xl"
+              className="responsive-card bg-white/98 backdrop-blur-md flex-col rounded-2xl shadow-2xl"
               style={{
                 boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
-                padding:'20px',
-                marginRight:'20px',
-                marginBottom:'20px',
-                width: '340px',
-                minWidth: '340px',
-                maxWidth: '340px',
-                minHeight: 'calc(100vh - 8rem)',
-                maxHeight: 'calc(100vh - 8rem)',
-                height: 'calc(100vh - 8rem)',
                 overflow: 'auto',
                 boxSizing: 'border-box',
                 flexShrink: 0,
                 flexGrow: 0,
-                display: 'none',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                zIndex: 100
               }}
             >
               {/* Section Number - Very Large and Light */}
@@ -225,18 +263,17 @@ const TimelineHero = ({
                 {currentSectionData.cardDescription}
               </p>
 
-              {/* Grid of 6 Mini Cards */}
+              {/* Grid Items - Responsive (show 4 on mobile, 6 on desktop) */}
               {currentSectionData.gridItems && currentSectionData.gridItems.length > 0 && (
-                <div className="grid-items-container hidden lg:grid mt-4 px-1 grid-cols-2 gap-2.5 sm:mt-5 sm:px-2 sm:grid-cols-3 sm:gap-3 lg:mt-6 lg:px-0 lg:gap-3" style={{ flexShrink: 0, width: '100%', minWidth: '100%', maxWidth: '100%' }}>
-                  {currentSectionData.gridItems.map((item, index) => (
+                <div className="grid-items-container mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:mt-6 lg:gap-3" style={{ flexShrink: 0, width: '100%', minWidth: '100%', maxWidth: '100%' }}>
+                  {currentSectionData.gridItems.slice(0, window.innerWidth >= 1280 ? 6 : 4).map((item, index) => (
                     <div
                       key={index}
                       className="grid-item group relative overflow-hidden rounded-lg cursor-pointer transform transition-all duration-300 hover:scale-105 active:scale-95"
                       style={{
                         width: '100%',
-                        height: '120px',
-                        minHeight: '120px',
-                        maxHeight: '120px',
+                        paddingBottom: '75%',
+                        height: 0,
                         position: 'relative',
                         overflow: 'hidden'
                       }}
@@ -311,76 +348,6 @@ const TimelineHero = ({
         )}
       </AnimatePresence>
 
-      {/* Mobile Card */}
-      <AnimatePresence initial={false} mode="wait">
-        {backgroundZoomed && (
-          <motion.div
-            key={activeSection}
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 1 }}
-            transition={{
-              duration: 0,
-            }}
-            className="mobile-card absolute bottom-[68px] left-4 right-4 rounded-2xl bg-white/98 backdrop-blur-md p-4 shadow-2xl sm:bottom-20 sm:left-6 sm:right-6 sm:p-6 md:bottom-24 md:p-7 xl:hidden max-h-[calc(100vh-180px)] overflow-y-auto scrollbar-hide"
-            style={{
-              boxShadow: '0 20px 40px rgba(0, 0, 0, 0.25), 0 10px 20px rgba(0, 0, 0, 0.15)',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none'
-            }}
-          >
-            {/* Section Number */}
-            <p className="text-2xl font-light text-gray-300 sm:text-3xl md:text-4xl leading-none">
-              {currentSectionData.sectionNumber}
-            </p>
-
-            {/* Card Title */}
-            <h2 className="mt-0.5 text-lg font-semibold leading-tight text-gray-900 sm:text-xl md:text-2xl">
-              {currentSectionData.cardTitle}
-            </h2>
-
-            {/* Description */}
-            <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-gray-700 sm:mt-3 sm:line-clamp-3 sm:text-sm md:text-base">
-              {currentSectionData.cardDescription}
-            </p>
-
-            {/* Grid Items */}
-            {currentSectionData.gridItems && currentSectionData.gridItems.length > 0 && (
-              <div className="mobile-grid-items-container mt-3 grid grid-cols-2 gap-2.5 sm:mt-4 sm:grid-cols-3 sm:gap-3 md:mt-5 md:gap-4">
-                {currentSectionData.gridItems.slice(0, 4).map((item, index) => (
-                  <div
-                    key={index}
-                    className="mobile-grid-item group relative overflow-hidden rounded-lg shadow-md transition-transform duration-300 active:scale-95 sm:rounded-xl"
-                    style={{
-                      width: '100%',
-                      paddingBottom: '75%',
-                      height: 0,
-                      position: 'relative'
-                    }}
-                  >
-                    <img
-                      src={item.imageUrl}
-                      alt={item.label}
-                      className="object-cover"
-                      style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-                      loading="eager"
-                      onError={(e) => {
-                        e.target.style.backgroundColor = '#e5e7eb'
-                      }}
-                    />
-                    <div className="mobile-image-overlay absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                    <div className="mobile-image-label-container absolute inset-0 flex items-end p-2 sm:p-2.5">
-                      <p className="text-[9px] font-semibold leading-tight text-white drop-shadow-lg sm:text-[10px]">
-                        {item.label}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
     </>
   )
