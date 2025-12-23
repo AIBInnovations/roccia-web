@@ -155,8 +155,8 @@ const TimelineHero = ({
             min-height: calc(100vh - 8rem) !important;
             max-height: calc(100vh - 8rem) !important;
             padding: 20px !important;
-            margin-right: 20px !important;
-            margin-bottom: 20px !important;
+            margin-right: 40px !important;
+            margin-bottom: 40px !important;
             bottom: auto !important;
             left: auto !important;
             right: auto !important;
@@ -194,7 +194,7 @@ const TimelineHero = ({
       </AnimatePresence>
 
       {/* Main Content Container */}
-      <div className="main-content-container relative z-10 flex h-full w-full items-start justify-between px-5 pb-20 pt-6 sm:px-8 sm:pt-8 md:items-center md:px-10 md:pb-24 md:pt-10 lg:px-12 lg:pb-20 xl:px-16">
+      <div className="main-content-container relative z-10 flex h-full w-full items-start justify-between px-8 pb-20 pt-8 sm:px-12 sm:pt-10 md:items-center md:px-16 md:pb-24 md:pt-12 lg:px-20 lg:pb-20 xl:px-28">
 
         {/* LEFT SECTION - Title */}
         <div className="title-section flex flex-col items-start justify-start w-full space-y-4 pb-4 md:justify-center md:space-y-8 md:w-auto lg:pb-8">
